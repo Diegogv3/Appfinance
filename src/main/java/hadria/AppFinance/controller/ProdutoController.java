@@ -23,7 +23,7 @@ public class ProdutoController {
     public List<Produto> getALl() { return produtoService.getAll();}
 
     @PostMapping
-    public Produto create(@RequestBody Produto produto) {return produtoService.save(produto);}
+    public Produto create(@ModelAttribute Produto produto) {return produtoService.save(produto);}
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){produtoService.delete(id);}

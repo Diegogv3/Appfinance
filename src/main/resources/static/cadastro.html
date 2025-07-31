@@ -5,22 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
+    
 </head>
 <body>
-    <div class="container bg-blue-700">
-        <h1>Cadastro de Produto</h1>
-        <form action="/cadastrar" method="post">
-            <div class="form-group">
-                <label for="name">Nome do produto:</label>
-                <input type="text" id="name" name="name" required>
-                <form action="/cadastrar" method="post">
-            <div class="form-group">
-                <label for="username">Data de validade:</label>
-                <input type="text" id="username" name="username" required> 
-            <div class="form-group">
-                <label for="username">Quantidade:</label>
-                <input type="text" id="username" name="username" required> 
+    <div class="container">
+        <div class="cadastro">
+            <h1 class="title">Cadastro de Produto</h1>
+            <form action="/produto" method="post">
+                <div class="form-group">
+                    <label for="name">Nome do produto:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="expirationDate">Data de validade:</label>
+                    <input type="text" id="expirationDate" name="expirationDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantidade:</label>
+                    <input type="number" id="quantity" name="quantity" required>
+                </div>
+                <button>Confirmar</button>
+            </form>
+        </div>
+        <div class="MostrarProdutos">
+            
+        </div>
+        
     </div>
+
+
+
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Impede o carregamento da página
+            const formData = new FormData(this);
+            fetch('/produto', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Cadastro realizado com sucesso!');
+                    } else {
+                        alert('Erro ao cadastrar!');
+                    }
+                })
+                .catch(() => alert('Erro ao cadastrar!'));
+        });
+    </script>
 </body>
 </html>
